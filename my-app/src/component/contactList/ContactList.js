@@ -1,19 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
-import css from './Contacts.module.css'
-import {TransitionGroup} from 'react-transition-group'
-// import transitionList from '../../transitionStyle/transitionList.module.css'
-
 import ContactListItem from "./ContactListItem";
+import PropTypes from "prop-types";
+import css from "./Contacts.module.css";
+import { TransitionGroup, CSSTransition} from "react-transition-group";
+import transitionItem from '../../transitionStyle/transitionItem.module.css'
+
 const ContactList = ({ contact, deleteContact }) => {
   return (
-    <TransitionGroup  component="ul" className={css.contacts__list}>
+    <TransitionGroup component="ul" className={css.contacts__list}>
       {contact.map(contact => (
+         <CSSTransition key={contact.id} classNames={transitionItem} timeout={500} unmountOnExit>
         <ContactListItem
           contact={contact}
           key={contact.id}
           deleteContact={deleteContact}
         />
+        </CSSTransition>
       ))}
     </TransitionGroup>
   );

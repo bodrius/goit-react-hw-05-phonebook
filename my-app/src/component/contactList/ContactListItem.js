@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import css from "./Contacts.module.css";
-import { CSSTransition } from "react-transition-group";
-import transitionItem from '../../transitionStyle/transitionItem.module.css'
+
 
 
 const ContactListItem = ({ contact: { id, name, number }, deleteContact }) => {
   return (
-    <CSSTransition key={id} classNames={transitionItem} timeout={2000} unmountOnExit>
-    <li className={css.contacts__item}>
+    <li className={css.contacts__item} key={id}>
       <span className={css.contacts__name}>{name}</span>
       <br />
       <span className={css.contacts__name}>{number}</span>
@@ -21,7 +19,6 @@ const ContactListItem = ({ contact: { id, name, number }, deleteContact }) => {
         &#x292B;
       </button>
     </li>
-    </CSSTransition>
   );
 };
 
