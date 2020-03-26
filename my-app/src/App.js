@@ -9,22 +9,29 @@ import transitionTitle from "./transitionStyle/transitionTitle.module.css";
 class App extends React.Component {
   state = {
     contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" }
+      // { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      // { id: "id-2", name: "Hermione Kline", number: "443-89-12" }
     ],
     filter: "",
     animation: false
   };
 
   componentDidMount() {
-    this.setState({
-      contacts: JSON.parse(localStorage.getItem("contacts")),
-      animation: true
-    });
+    if (localStorage.getItem("contacts") === null) {
+      localStorage.setItem(
+        "contacts",
+        JSON.stringify([...this.state.contacts])
+      );
+    } else {
+      this.setState({
+        contacts: [...JSON.parse(localStorage.getItem("contacts"))],
+        animation:true
+      });
+    }
   }
 
   componentDidUpdate() {
-    localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+   localStorage.setItem("contacts",JSON.stringify(this.state.contacts));
   }
 
   handelSubmitForm = (e, data) => {
